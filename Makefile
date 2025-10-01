@@ -6,7 +6,10 @@ C_FLAGS = -Wall -Wextra -Werror -pthread
 SRC_DIR = srcs
 OBJ_DIR = objs
 
-SRC = main.c
+SRC = main.c\
+	init.c\
+	utils.c\
+	
 SOURCES = $(addprefix $(SRC_DIR)/, $(SRC))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 

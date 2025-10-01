@@ -1,23 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/26 13:15:58 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/01 16:32:18 by clnicola         ###   ########.fr       */
+/*   Created: 2025/10/01 16:23:23 by clnicola          #+#    #+#             */
+/*   Updated: 2025/10/01 16:35:15 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int ac, char **av)
+static int	is_num(char *str)
 {
-	t_table	*table;
+	int	i;
 
-	check_input(ac, av);
-	table = init_table(ac, av);
-	// pthread_create(&thread1, NULL, routine, (void *)&philos);
-	// pthread_join(thread1, NULL);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	check_input(int ac, char **argv)
+{
+	int	i;
+
+	i = 1;
+	if (ac < 5 || ac > 6)
+	{
+		printf("Wrong number of arguments.\n");
+		exit(1);
+	}
+	while (i < ac)
+	{
+		if (!is_num(argv[i]))
+		{
+			printf("Arguments must be positive numbers only.\n");
+			exit(1);
+		}
+		i++;
+	}
+	return (1);
 }
