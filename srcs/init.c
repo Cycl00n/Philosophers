@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:51:01 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/02 15:27:40 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:44:27 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_phil	**init_philo(t_table *table)
 		philos[i]->id = i;
 		philos[i]->table = table;
 		assign_fork(philos[i]);
+		table->starttime = gettimems();
 		if (pthread_create(&philos[i]->thread, NULL, routine, philos[i]))
 		{
 			perror("Failed to create thread)");

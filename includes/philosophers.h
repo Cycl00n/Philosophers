@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:16:07 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/02 15:31:36 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:41:38 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_phil	t_phil;
 typedef struct s_table
 {
 	int					nbr_philo;
+	time_t				starttime;
 	time_t				timetd;
 	time_t				timete;
 	time_t				timets;
@@ -47,6 +48,7 @@ void					assign_fork(t_phil *philos);
 pthread_mutex_t			*init_fork(t_table *table);
 int						check_input(int ac, char **argv);
 void					eat_routine(t_phil *philos);
-long					gettime(void);
+time_t					gettimems(void);
+void					print_status(t_phil *philos, char *str);
 
 #endif

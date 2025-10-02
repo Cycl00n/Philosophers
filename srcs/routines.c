@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:14:50 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/02 15:26:39 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/02 17:46:31 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@ void	eat_routine(t_phil *philos)
 	while (1)
 	{
 		pthread_mutex_lock(&philos->table->forks_lock[philos->fork[0]]);
-		printf("Philo %d's got fork %d\n", philos->id, philos->fork[0]);
+		print_status(philos, "started eating");
 		pthread_mutex_lock(&philos->table->forks_lock[philos->fork[1]]);
-		printf("Philo %d's got fork %d\n", philos->id, philos->fork[1]);
-		printf("Philo %d's is eating with fork %d & %d\n", philos->id,
-			philos->fork[0], philos->fork[1]);
-		usleep(2000);
+		usleep(philos->table->timete * 1000);
 		pthread_mutex_unlock(&philos->table->forks_lock[philos->fork[1]]);
 		pthread_mutex_unlock(&philos->table->forks_lock[philos->fork[0]]);
-		printf("Philo %d released forks\n", philos->id);
+		usleep(10);
 	}
 }
+
+/*void	sleep_routine(t_phil *philos)
+{
+}*/
