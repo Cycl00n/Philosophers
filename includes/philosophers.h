@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:16:07 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/01 16:32:48 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/02 15:31:36 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
+# include <unistd.h>
 
 typedef struct s_phil	t_phil;
 
@@ -45,5 +46,7 @@ void					*routine(void *data);
 void					assign_fork(t_phil *philos);
 pthread_mutex_t			*init_fork(t_table *table);
 int						check_input(int ac, char **argv);
+void					eat_routine(t_phil *philos);
+long					gettime(void);
 
 #endif

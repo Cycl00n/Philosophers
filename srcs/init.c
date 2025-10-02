@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:51:01 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/01 17:08:50 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/02 15:27:40 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ void	*routine(void *data)
 	t_phil	*philos;
 
 	philos = data;
-	printf("Routine %d\n", philos->id);
+	eat_routine(philos);
 	return (data);
 }

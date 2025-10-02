@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:23:23 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/01 16:35:15 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/02 15:31:16 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,11 @@ int	check_input(int ac, char **argv)
 		i++;
 	}
 	return (1);
+}
+long	gettime(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

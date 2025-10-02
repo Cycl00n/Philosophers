@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/26 13:15:58 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/01 16:32:18 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/02 13:54:25 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(int ac, char **av)
 
 	check_input(ac, av);
 	table = init_table(ac, av);
-	// pthread_create(&thread1, NULL, routine, (void *)&philos);
-	// pthread_join(thread1, NULL);
+	for (int i = 0; i < table->nbr_philo; i++)
+		pthread_join(table->philos[i]->thread, NULL);
+	return (0);
 }
