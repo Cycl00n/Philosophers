@@ -10,6 +10,8 @@ SRC = main.c\
 	init.c\
 	utils.c\
 	routines.c\
+	death.c\
+	threading.c\
 	
 SOURCES = $(addprefix $(SRC_DIR)/, $(SRC))
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))

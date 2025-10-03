@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 16:23:23 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/02 17:45:41 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/03 15:41:37 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ time_t	gettimems(void)
 
 void	print_status(t_phil *philos, char *str)
 {
-	printf("%ld ms: Philosopher %d %s\n", gettimems()
-		- philos->table->starttime, philos->id + 1, str);
+	pthread_mutex_lock(&philos->table->write_lock);
+	if (philos->table->is_on)
+		printf("%ld ms: Philosopher %d %s\n", gettimems()
+			- philos->table->starttime, philos->id + 1, str);
+	pthread_mutex_unlock(&philos->table->write_lock);
 }

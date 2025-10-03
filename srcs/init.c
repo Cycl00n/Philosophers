@@ -6,7 +6,7 @@
 /*   By: clnicola <clnicola@student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 12:51:01 by clnicola          #+#    #+#             */
-/*   Updated: 2025/10/02 17:44:27 by clnicola         ###   ########.fr       */
+/*   Updated: 2025/10/03 17:20:16 by clnicola         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ t_table	*init_table(int ac, char **av)
 {
 	t_table	*table;
 
-	ac = 0;
 	table = malloc(sizeof(t_table) * 1);
 	if (!table)
 		return (0);
+	table->is_on = 1;
 	table->nbr_philo = atoi(av[1]);
 	table->timetd = atoi(av[2]);
 	table->timete = atoi(av[3]);
@@ -28,6 +28,8 @@ t_table	*init_table(int ac, char **av)
 		table->amount_eat_b4d = atoi(av[5]);
 	table->forks_lock = init_fork(table);
 	table->philos = init_philo(table);
+	pthread_mutex_init(&table->write_lock, NULL);
+	pthread_mutex_init(&table->prog_stop_lock, NULL);
 	return (table);
 }
 
@@ -41,15 +43,12 @@ t_phil	**init_philo(t_table *table)
 	while (i < table->nbr_philo)
 	{
 		philos[i] = malloc(sizeof(t_phil));
+		pthread_mutex_init(&philos[i]->timemeal_lock, NULL);
 		philos[i]->id = i;
 		philos[i]->table = table;
+		philos[i]->amout_eaten = 0;
+		philos[i]->last_meal = table->starttime;
 		assign_fork(philos[i]);
-		table->starttime = gettimems();
-		if (pthread_create(&philos[i]->thread, NULL, routine, philos[i]))
-		{
-			perror("Failed to create thread)");
-			free(philos);
-		}
 		i++;
 	}
 	return (philos);
@@ -84,13 +83,4 @@ void	assign_fork(t_phil *philos)
 		philos->fork[0] = philos->id;
 		philos->fork[1] = (philos->id + 1) % philos->table->nbr_philo;
 	}
-}
-
-void	*routine(void *data)
-{
-	t_phil	*philos;
-
-	philos = data;
-	eat_routine(philos);
-	return (data);
 }
